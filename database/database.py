@@ -42,9 +42,7 @@ class DB:
         con = DB.conexao()
         cursor = con.cursor()
         df = pd.DataFrame(list_comment,columns=['comentarios'])
-        df = df.replace('"', "'")
-        #df = pd.read_csv('comentarios.csv', encoding='utf-8',sep=';')
-        #df.columns = ['comentarios']
+    
         for comment in df['comentarios']:
     
             query = 'insert into comentarios (comentario,data_post,fonte_jornal) values("{}", "{}" , "{}")'.format(comment,data,fonte_jornal)
@@ -52,11 +50,11 @@ class DB:
             cursor.execute(query)
             con.commit()
         
-        #cursor.close()
+        
         print('Comentários persistidos com sucesso.')  
 
 
-#DB.insert_comment(['comentari"o "1" ',"comentario 2"],'2001/11/22','Liberal')
+
 
      
 
