@@ -39,8 +39,8 @@ for comentario in comentarios:
 '''
 
 #novo método 
-LINK = 'https://www.instagram.com/p/DRK6RxfkXDV' 
-DATA = '2001/11/22'
+LINK = 'https://www.instagram.com/doldiarioonline/p/DGDmjvbRGtu/' 
+DATA = '2025/02/12'
 FONTE_JORNAL = 'Diário online do Pará'
 
 
@@ -69,7 +69,6 @@ print('______________________________\n')
 print('Comentarios coletados abaixo: ')
 cont = 0
 for comentario in comentarios:
-    print(comentario)
     cont += 1
 comentarios_normalizados = Normalization_comments.normalization_comment(comentarios)
 

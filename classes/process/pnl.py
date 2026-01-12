@@ -15,13 +15,14 @@ class Pnl:
 
 
     @classmethod
-    def get_comment(cls, nome_arquivo:str):
+    def get_comment(cls,con):
         '''
             Retorna DataFrame dos comentários obtidos 
         '''
-        col_name = ['Comentários']
-        dataframe = pd.read_csv(ROOT_PATH / 'database' / nome_arquivo, sep=';', encoding='utf-8',names=['comentarios'], engine='python',on_bad_lines='skip')
-        
+       
+        ''' col_name = ['Comentários']
+        dataframe = pd.read_csv(ROOT_PATH / 'database' / nome_arquivo, sep=';', encoding='utf-8',names=['comentarios'], engine='python',on_bad_lines='skip')'''
+        dataframe = pd.read_sql_query('select * from comentarios',con)
 
         return dataframe
     
@@ -43,7 +44,7 @@ class Pnl:
         lista_tokens = []
         comentarios = []
 
-        for comentario in dataframe['comentarios']:
+        for comentario in dataframe['comentario']:
             somente_letras = re.sub('[^a-zA-ZáéíóúÁÉÍÓÚãõÃÕçÇ]',' ',comentario.lower())
             tokens = word_tokenize(somente_letras)
             tokens_wo_stopwords = [t for t in tokens if t not in stopwords_pt]

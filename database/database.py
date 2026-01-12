@@ -46,13 +46,32 @@ class DB:
         for comment in df['comentarios']:
     
             query = 'insert into comentarios (comentario,data_post,fonte_jornal) values("{}", "{}" , "{}")'.format(comment,data,fonte_jornal)
-            print(query)
+            
             cursor.execute(query)
             con.commit()
+            
         
         
-        print('Comentários persistidos com sucesso.')  
+        print('Comentários persistidos com sucesso.')
+        con.close()
 
+
+
+    @classmethod
+    def insert_comment_w_sentiment(cls, comment, sentiment):
+        con = DB.conexao()
+        cursor = con.cursor()
+        #df = pd.DataFrame(list_comment,columns=['comentarios'])
+    
+    
+        query = 'insert into comentarios_w_sentiment (comentario,sentimento) values("{}", "{}")'.format(comment,sentiment)
+        print(query)    
+        cursor.execute(query)
+        con.commit()
+        
+        
+        print('Comentários persistidos com sucesso.')      
+        con.close()
 
 
 
