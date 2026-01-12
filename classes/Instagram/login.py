@@ -16,8 +16,8 @@ class Login:
     @classmethod    
     def inicializarNavegador(cls, url):
         options = webdriver.FirefoxOptions()
-        options.add_argument("--headless")
-        navegador = webdriver.Firefox(options=options)
+        #options.add_argument("--headless")
+        navegador = webdriver.Firefox()
         navegador.get(url)
 
         for i in range(1,9):
