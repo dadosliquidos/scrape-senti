@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS tb_Posts (
   id_posts INT NOT NULL primary key auto_increment,
-  link TEXT NULL,
+  link TEXT NULL unique,
   data_post DATE NULL,
   nome_pagina VARCHAR(60) NULL
   );
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS tb_comentarios (
     
     
 
-CREATE TABLE IF NOT EXISTS comentarios_com_sentimentos (
+CREATE TABLE IF NOT EXISTS tb_comentarios_com_sentimentos (
    id_c_sentimentos INT NOT NULL primary key auto_increment,
   sentimento VARCHAR(45) NULL,
   comentarios_id_comentarios INT NOT NULL,

@@ -10,16 +10,9 @@ HOST = os.getenv('HOST')
 USER = os.getenv('USER')
 PASSWORD = os.getenv('PASSWORD')
 DATABASE =  os.getenv('DATABASE')
-
-
-#cursor = con.cursor()
- 
-
-#cursor.execute('select * from comentarios')
-
-
-#for (id, comentario,sentimento) in cursor:
-#    print(id,comentario,sentimento)
+TABLE_P = os.getenv('TABLE_P')
+TABLE_C = os.getenv('TABLE_C')
+TABLE_W_S = os.getenv('TABLE_W_S')
 
 class DB:
     def __init__(self):
@@ -37,57 +30,80 @@ class DB:
 
         return con
     
+
+
     @classmethod
-    def insert_comment(cls, list_comment,data,fonte_jornal ):
+    def insert_post(cls, data, nome_pagina, link ):
+        '''
+        Método para persistir dados de Post
+        '''
         con = DB.conexao()
         cursor = con.cursor()
-        df = pd.DataFrame(list_comment,columns=['comentarios'])
+        
+        query = f'insert into {TABLE_P} (link, data_post,nome_pagina) values("{link}","{data}","{nome_pagina}")'
+
+        cursor.execute(query)
+        con.commit()
+            
+        ultimo_id =  cursor.lastrowid    
+        
+       
+        return ultimo_id
     
+    @classmethod
+    def insert_comment(cls, list_comment:list , id_post ):
+        '''
+        Método para persistir comentários coletados do Instagram.
+        '''
+        con = DB.conexao()
+        cursor = con.cursor()
+        
+        df = pd.DataFrame(list_comment,columns=['comentarios'])
+        
         for comment in df['comentarios']:
     
-            query = 'insert into comentarios (comentario,data_post,fonte_jornal) values("{}", "{}" , "{}")'.format(comment,data,fonte_jornal)
+            query = f'insert into {TABLE_C}(comentario,Posts_id_posts) values ("{comment}","{id_post}")'
             
             cursor.execute(query)
-            con.commit()
             
-        
-        
-        print('Comentários persistidos com sucesso.')
-        con.close()
+            con.commit()
+
 
 
 
     @classmethod
-    def insert_comment_w_sentiment(cls, comment, sentiment):
+    def insert_comment_w_sentiment(cls,sentiment,comentario_id,post_id):
         con = DB.conexao()
         cursor = con.cursor()
         #df = pd.DataFrame(list_comment,columns=['comentarios'])
     
     
-        query = 'insert into comentarios_w_sentiment (comentario,sentimento) values("{}", "{}")'.format(comment,sentiment)
-        print(query)    
+        query = f'insert into {TABLE_W_S} (sentimento,comentarios_id_comentarios,Posts_id_posts) values("{sentiment}", "{comentario_id}","{post_id}")'    
         cursor.execute(query)
         con.commit()
         
         
-        print('Comentários persistidos com sucesso.')      
+        
+          
         con.close()
-
+     
 
 
     @classmethod
-    def read_table(cls,table):
+    def read_table(cls,query):
         con = DB.conexao()
         cursor = con.cursor()
         comentarios = list()
-        query = f'select * from {table}'
         cursor.execute(query)
         
         for i in cursor:
             comentarios.append(i)
         
         return comentarios
-            
+    
+
+
+
 
 
 

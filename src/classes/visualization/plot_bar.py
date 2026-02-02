@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from classes.process.analyze_sentiment import Analyzer
+from src.classes.process.analyze_sentiment import Analyzer
 from pathlib import Path
 import matplotlib
 matplotlib.use('Agg') # or 'SVG'
