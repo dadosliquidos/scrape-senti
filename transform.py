@@ -30,8 +30,8 @@ where link = '{LINK}'
 comentarios = DB.read_table(query)
 
 for index in tqdm(comentarios,desc='Extraindo análise de sentimentos'): 
+    time.sleep(0.001)
     sentimento = Chat.classificator(comment=index[2])
-    time.sleep(1)
     DB.insert_comment_w_sentiment(
                 sentiment=sentimento,
                 comentario_id=index[1],

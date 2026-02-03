@@ -57,7 +57,7 @@ print('______________________________\n')
 print('Comentarios coletados abaixo: ')
 cont = 0
 for comentario in tqdm(comentarios,desc='Coletando comentarios'):
-    time.sleep(1)
+    time.sleep(0.001)
     cont += 1
 comentarios_normalizados = Normalization_comments.normalization_comment(comentarios)
 
@@ -77,3 +77,5 @@ try:
 
 except mysql.connector.IntegrityError  as e:
     print(f'Erro apresentado: {e}')
+
+

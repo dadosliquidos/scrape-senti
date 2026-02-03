@@ -63,7 +63,7 @@ class DB:
         df = pd.DataFrame(list_comment,columns=['comentarios'])
         
         for comment in tqdm(df['comentarios'],desc='Persistindo comentários ao Banco de Dados.'):
-            time.sleep(1)
+            time.sleep(0.001)
             query = f'insert into {TABLE_C}(comentario,Posts_id_posts) values ("{comment}","{id_post}")'
             
             cursor.execute(query)
