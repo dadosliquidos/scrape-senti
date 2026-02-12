@@ -103,7 +103,19 @@ class DB:
         
         return comentarios
     
+    @classmethod
+    def execute_query(cls, query):
+        con = DB.conexao()
+        cursor = con.cursor()
+            
+  
+        cursor.execute(query)
+        con.commit()
+        con.close()        
+        print('Query excutada com sucesso.')
 
+        
+        
 
 
 
