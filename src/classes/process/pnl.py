@@ -47,7 +47,7 @@ class Pnl:
         for comentario in dataframe['comentario']:
             somente_letras = re.sub('[^a-zA-ZáéíóúÁÉÍÓÚãõÃÕçÇ]',' ',comentario.lower())
             tokens = word_tokenize(somente_letras)
-            tokens_wo_stopwords = [t for t in tokens if t not in stopwords_pt]
+            tokens_wo_stopwords = [t.upper() for t in tokens if t not in stopwords_pt]
             
             comentarios.append(' '.join(tokens_wo_stopwords)) #lista de comentarios
            

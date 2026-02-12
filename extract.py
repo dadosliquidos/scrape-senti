@@ -27,7 +27,7 @@ ROOT_PATH = Path(__file__).parent
 
 
 #novo método 
-LINK = 'https://www.instagram.com/doldiarioonline/p/DGDmjvbRGtu/' 
+LINK = 'https://www.instagram.com/p/DURO7_Mkd30/?img_index=1' 
 DATA = '2025/02/12'
 NOME_PAGINA = 'Diário online do Pará'
 

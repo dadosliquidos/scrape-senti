@@ -12,9 +12,9 @@ import time
 
 
 load_dotenv()
-TABLE_C = os.getenv('TABLE_C')
+TABLE_C = os.getenv('TABLE_C') 
 TABLE_P = os.getenv('TABLE_P')
-LINK = 'https://www.instagram.com/doldiarioonline/p/DGDmjvbRGtu/'
+LINK = 'https://www.instagram.com/p/DUBjtCAEfVI/'
 
 query = f'''
  
