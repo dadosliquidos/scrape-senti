@@ -8,7 +8,7 @@ import os
 
 
 
-LINK = 'https://www.instagram.com/p/DUqPidajdPE/'
+LINK = 'https://www.instagram.com/p/DRszG9Skb21/'
 
 
 

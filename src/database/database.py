@@ -64,7 +64,7 @@ class DB:
         
         for comment in tqdm(df['comentarios'],desc='Persistindo comentários ao Banco de Dados.'):
             time.sleep(0.001)
-            query = f'insert into {TABLE_C}(comentario,Posts_id_posts) values ("{comment}","{id_post}")'
+            query = f'insert into {TABLE_C}(comentario,Posts_id_posts) values ("{comment}",{id_post})'
             
             cursor.execute(query)
             

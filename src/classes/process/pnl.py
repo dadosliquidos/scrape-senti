@@ -3,6 +3,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from pathlib import Path
 import pandas as pd
+import emoji
 import re
 
 
@@ -50,5 +51,26 @@ class Pnl:
             tokens_wo_stopwords = [t.upper() for t in tokens if t not in stopwords_pt]
             
             comentarios.append(' '.join(tokens_wo_stopwords)) #lista de comentarios
+           
+        return comentarios
+    
+    @classmethod
+    def only_emojis(cls,dataframe):
+        '''
+            r retona comentarios somente com emoijs
+            
+        '''
+        
+        
+
+       
+        comentarios = []
+
+        for comentario in dataframe['comentario']:
+            somente_emojis = [c for c in comentario if emoji.is_emoji(c)]
+            
+            
+            
+            comentarios.append(' '.join(somente_emojis)) #lista de comentarios
            
         return comentarios

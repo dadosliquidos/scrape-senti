@@ -14,7 +14,7 @@ import time
 load_dotenv()
 TABLE_C = os.getenv('TABLE_C') 
 TABLE_P = os.getenv('TABLE_P')
-LINK = 'https://www.instagram.com/p/DUqPidajdPE/'
+LINK = 'https://www.instagram.com/p/DUqQiuhDJB4/'
 
 query = f'''
  

@@ -9,6 +9,6 @@ class Normalization_comments:
     def normalization_comment(cls,list_comment: list):
         new_list = []
         for comment in list_comment:
-            new_list.append(f'\ '+comment.replace('"',"'"))
+            new_list.append(f'\ '+comment.replace('"',"'")+f' \ ')
         
         return new_list

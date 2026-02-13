@@ -55,15 +55,27 @@ class Scrape:
             #time.sleep(3)
             height = driver.execute_script(height_script)
             driver.execute_script(script)
-            time.sleep(10)
-            height_new = '''
-            iframe = document.getElementsByClassName("x5yr21d xw2csxc x1odjw0f x1n2onr6")[0];
-            return iframe.scrollHeight;     
-            '''
-
-            if height == driver.execute_script(height_new):
+           # time.sleep(30)
+           
+            max_wait_time = 600
+            height_changed = False
+            start_time = time.time()
+            while (time.time() - start_time) < max_wait_time:
+                height_new = '''
+                iframe = document.getElementsByClassName("x5yr21d xw2csxc x1odjw0f x1n2onr6")[0];
+                return iframe.scrollHeight;     
+                '''
+                if driver.execute_script(height_new) > height:
+                    height = driver.execute_script(height_new)
+                    height_changed = True
+                    break
+            
+            if not height_changed:
                 print('Scrollado com sucesso!')
                 break
+           # if height == driver.execute_script(height_new):
+            #    print('Scrollado com sucesso!')
+             #   break
             
        
        

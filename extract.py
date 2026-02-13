@@ -27,15 +27,16 @@ ROOT_PATH = Path(__file__).parent
 
 
 #novo método 
-LINK = 'https://www.instagram.com/p/DUqPidajdPE/' 
-DATA = '2026/02/11'
-NOME_PAGINA = 'Clube do Remo'
+LINK = 'https://www.instagram.com/p/DS0xxvuERoQ/'  
+DATA = '2025/12/28'
+NOME_PAGINA = 'geração de imagem'
 
 
 
 #dados do posto do instagram
 input_Instagram = PostInstagram(LINK, DATA,NOME_PAGINA)
 
+start_time = time.time()
 #login instagram
 login = Login.inicializarNavegador(input_Instagram.set_link())
 
@@ -46,13 +47,15 @@ Scrape.scroll_comments(login)
 site_html = Scrape.Scraping(login)
 
 comentarios = Scrape.get_comments(site_html)
-
+end_time = time.time()
+tempo_de_coleta = end_time - start_time
 #imprimindo dados do post do instagram
 print('Dados do posto do instagram: \n')
 print('______________________________\n')
 print('Link do Post: ', input_Instagram.set_link(),'\n')
 print('Data do Post:', input_Instagram.set_data(),'\n')
 print('Fonte:', input_Instagram.set_nome_pagina(),'\n')
+print('Tempo de coleta: ', round(tempo_de_coleta/60,0),' minutos \n')
 print('______________________________\n')
 print('Comentarios coletados abaixo: ')
 cont = 0
