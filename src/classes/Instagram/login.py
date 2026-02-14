@@ -17,36 +17,11 @@ class Login:
 
     @classmethod    
     def inicializarNavegador(cls, url):
-      #  options = webdriver.FirefoxOptions()
-       # #options.add_argument("--headless")
-       # navegador = webdriver.Firefox()
-        #navegador.get(url)
-        options = Options()
-
-        options.add_experimental_option("detach", True)
-# ---------------------
-
-# 1. Remove a flag de automação
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option('useAutomationExtension', False)
-
-# 2. Muda o User-Agent
-        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-
-# 3. Desabilita a detecção do Blink
-        options.add_argument("--disable-blink-features=AutomationControlled")
-       
-
+        options = webdriver.FirefoxOptions()
+        #options.add_argument("--headless")
+        navegador = webdriver.Firefox()
     
-        navegador = webdriver.Chrome(options=options)
-
-        navegador.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-                 "source": """
-                 Object.defineProperty(navigator, 'webdriver', {
-                    get: () => undefined
-                     })
-                    """
-})
+       
 
         navegador.get(url)
 
