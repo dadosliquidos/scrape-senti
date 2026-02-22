@@ -44,8 +44,7 @@ CREATE TABLE IF NOT EXISTS Tb_fatos_analise_comentario (
 
   CONSTRAINT fk_Tb_fatos_análise_comentário_dim_post
     FOREIGN KEY (dim_post_id_post)
-    REFERENCES dim_post (id_post)
-    ON DELETE CASCADE,
+    REFERENCES dim_post (id_post),
   
   CONSTRAINT fk_Tb_fatos_análise_comentário_dim_sentimento
     FOREIGN KEY (dim_sentimento_id_sentimentos)
