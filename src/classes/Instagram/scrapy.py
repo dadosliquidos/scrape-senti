@@ -57,7 +57,7 @@ class Scrape:
             driver.execute_script(script)
            # time.sleep(30)
            
-            max_wait_time = 600
+            max_wait_time = 300
             height_changed = False
             start_time = time.time()
             while (time.time() - start_time) < max_wait_time:
@@ -66,6 +66,7 @@ class Scrape:
                 return iframe.scrollHeight;     
                 '''
                 if driver.execute_script(height_new) > height:
+                    time.sleep(2)
                     height = driver.execute_script(height_new)
                     height_changed = True
                     break
