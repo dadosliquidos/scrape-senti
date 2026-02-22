@@ -5,10 +5,33 @@ from pathlib import Path
 import pandas as pd
 import emoji
 import re
-
+import unicodedata
 
 #leitura dos arquivo com os comentários
 ROOT_PATH = Path(__file__).parent.parent.parent
+
+
+
+def remover_acentos_vogais(texto):
+    # Decompõe os caracteres (ex: 'ã' vira 'a' + '~')
+    processado = unicodedata.normalize('NFD', texto)
+    resultado = []
+    
+    # Definimos as vogais base para conferência
+    vogais = "aeiouAEIOU"
+    
+    for i, char in enumerate(processado):
+        # Se for uma marca de acento (Combining Mark)
+        if unicodedata.combining(char):
+            # Verificamos se o caractere anterior era uma vogal
+            if i > 0 and processado[i-1] in vogais:
+                continue # Pula o acento (remove)
+        
+        resultado.append(char)
+        
+    # Reagrupa e volta para o formato padrão (NFC)
+    return unicodedata.normalize('NFC', "".join(resultado))
+
 
 class Pnl:
     def __init__(self):
@@ -38,15 +61,24 @@ class Pnl:
         stopwords_pt = stopwords.words('portuguese') # dicionario que contem os stop word pt-br
         stopwords_pt.append('pra')
         stopwords_pt.append('tá')
+        stopwords_pt.append('ta')
         stopwords_pt.append('vai')
         stopwords_pt.append('já')
         stopwords_pt.append('aí')
+        stopwords_pt.append('ai')
+        stopwords_pt.append('q')
+        stopwords_pt.append('deu')
+        stopwords_pt.append('ja')
+        stopwords_pt.append('aí')
+        stopwords_pt.append('não')
+        stopwords_pt.append('nao')
 
         lista_tokens = []
         comentarios = []
 
         for comentario in dataframe['comentario']:
-            somente_letras = re.sub('[^a-zA-ZáéíóúÁÉÍÓÚãõÃÕçÇ]',' ',comentario.lower())
+            somente_letras = re.sub('[^a-zA-ZáéíóúÁÉÍÓÚãõÃÕçÇ\s]','',comentario.lower())
+            somente_letras = remover_acentos_vogais(somente_letras)
             tokens = word_tokenize(somente_letras)
             tokens_wo_stopwords = [t.upper() for t in tokens if t not in stopwords_pt]
             
