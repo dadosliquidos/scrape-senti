@@ -25,11 +25,23 @@ import time
 
 ROOT_PATH = Path(__file__).parent
 
+'''
+- Gov.Br - Isenção do Imposto de Renda (@govbr) - 30/11/2025: https://www.instagram.com/p/DRszG9Skb21/
+
+- Caso do Cão Orelha (@folhadespaulo) - 12/02/2026: https://www.instagram.com/p/DUqQiuhDJB4/ 
+
+- Realização show de Lady Gaga (@betour_rj) - 04/05/2025: https://www.instagram.com/p/DJOA1XbM4gZ/
+
+- Criação de vídeo com IA (@geracaodeimagem) - 28/12/2025: https://www.instagram.com/p/DS0xxvuERoQ/
+
+'''
+
+
 
 #novo método 
-LINK = 'https://www.instagram.com/p/DS0xxvuERoQ/'  
-DATA = '2025/12/28'
-NOME_PAGINA = 'geração de imagem'
+LINK = 'https://www.instagram.com/p/DUqQiuhDJB4/'  
+DATA = '2026/02/12'
+NOME_PAGINA = 'Folha de S.Paulo'
 
 
 
