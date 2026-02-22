@@ -10,21 +10,33 @@ class Chat:
     def classificator(cls,comment):
         
         prompt = f'''
-          Você atuará como classificador de sentimentos. Cabe ressaltar que a Analise de sentimentos, há subtema de Polarização: tecnica que extrai sentimentos se é positivo, negativo ou neutro.
-          voce irá classificar comentários coletados de uma postagem da rede social Instagram. Nesses comentários terá emojis, ou seja, podem indicar emoções, como ironia.
-          
-          caso haja algum comentário cuja o sentimento não seja identificável, classifique como "Neutro".
-          observação: Não de justificativas e somente retorne apenas as palavras abaixo :
-         
-              Positivo
-              Negativo
-              Neutro
+            
+           Você é um sistema de classificação de sentimentos estrito. Siga esta ordem de prioridade lógica para classificar o texto abaixo:
+
+        PASSO 1 - VERIFICAÇÃO DE CONTEÚDO (CRÍTICO):
+        - O texto contém APENAS espaços em branco, quebras de linha ou é uma string vazia?
+        -> Se SIM: Classifique IMEDIATAMENTE como "Outros" e pare.
+        -> Se NÃO (ou seja, se houver qualquer letra, número, pontuação OU EMOJI): Continue para o Passo 2. NUNCA classifique como "Outros" se houver conteúdo visível.
+
+        PASSO 2 - ANÁLISE DE SENTIMENTO:
+        Classifique o conteúdo restante em uma destas 3 categorias:
+
+        1. "Positivo": Elogios, concordância, emojis felizes/celebrativos.
+        2. "Negativo": Críticas, reclamações, emojis de desagrado e IRONIA (ex: elogio sarcástico deve ser Negativo).
+        3. "Neutro": Use estritamente para marcações de usuários (@usuario) sem texto adicional, perguntas factuais ou afirmações sem carga emocional. NÃO use esta categoria se houver qualquer adjetivo ou emoji expressivo.
+
         
-          comentario coletado : {comment}
+        ENTRADA PARA ANÁLISE:
+        Comentário: '{comment}'
+
+        SAÍDA:
+        Responda com apenas uma palavra (Positivo, Negativo, Neutro ou Outros). Sem pontuação.
+        
+
 
         '''
         
-        response: ChatResponse = chat(model='llama3', messages=[
+        response: ChatResponse = chat(model='solar', messages=[
                   {
                     'role': 'user',
                     'content': prompt,
