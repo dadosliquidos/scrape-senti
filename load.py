@@ -8,7 +8,7 @@ import os
 
 
 
-LINK = 'https://www.instagram.com/p/DRszG9Skb21/'
+LINK = 'https://www.instagram.com/p/DS0xxvuERoQ/'
 
 
 
@@ -41,6 +41,9 @@ select
 		when upper(cs.sentimento) = 'POSITIVO' then 1
 		when upper(cs.sentimento) = 'NEGATIVO' then 0
 		when upper(cs.sentimento) = 'NEUTRO' then 3
+        when upper(cs.sentimento) like '%POSITIVO%' then 1
+        when upper(cs.sentimento) like '%NEGATIVO%' then 0
+        when upper(cs.sentimento) like '%NEUTRO%' then 3
         else 4
 	 END id_sentimento,
 	 c.id_comentarios,
@@ -93,9 +96,12 @@ where p.post = '{LINK}';
 
 DB.execute_query(query_delete_C)
 DB.execute_query(query_delete_p)
-DB.execute_query(query_dim_post)
-DB.execute_query(query_dim_comentarios)
-DB.execute_query(query)
+try:
+    DB.execute_query(query_dim_post)
 
+    DB.execute_query(query_dim_comentarios)
+    DB.execute_query(query)
+except:
+    print('Informações não persistidas.')
 
 
